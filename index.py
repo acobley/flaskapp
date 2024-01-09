@@ -24,7 +24,7 @@ def hello_world():
     
     something = htmlItems.carouselItem(src, "Big Buck Bunny")
     
-    return render_template('index.html', categories=list, th_images=something)
+    return render_template('index.html', categories=list, th_imgs=something)
 
 @app.route('/Test/')
 def hello_page():
