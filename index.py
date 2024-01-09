@@ -19,7 +19,7 @@ def index_page():
         log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']))
         return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']) + log.cmd_color.WHITE
     else:
-        log.LOG_SUCCESS("[{0}] -- Fetched correctly!", request.remote_addr)
+        log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
         
     JSON_CATEGORIES = response.json()
     CATEGORIES = [item['category'] for item in JSON_CATEGORIES]
