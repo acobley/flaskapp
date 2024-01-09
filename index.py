@@ -17,7 +17,7 @@ def hello_world():
     
     list = ""
     for item in CATEGORIES:
-        list += '<li><a class="dropdown-item" href="./">' +str(item).capitalize()+ '</li>\n'
+        list += '<li><a class="dropdown-item" href="./">' +str(item).capitalize()+ '</a></li>\n'
     
     src = "http://" + glb.IP_NGINX + "/mp4/bbb.mp4"
     
