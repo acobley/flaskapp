@@ -21,6 +21,7 @@ def hello_world():
     response = requests.get(URL_CATEGORIES)
     print(response)
     print(response.status_code)
+    print(response.json())
     
     src = "http://" + IP_NGINX + "/mp4/bbb.mp4"
     
