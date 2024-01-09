@@ -15,6 +15,10 @@ app.debug = True
 def index_page():
     
     response = requests.get(glb.URL_CATEGORIES)    
+    if (response.status_code != 200):
+        log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']))
+        return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']) + log.cmd_color.WHITE
+    
     JSON_CATEGORIES = response.json()
     CATEGORIES = [item['category'] for item in JSON_CATEGORIES]
     
@@ -30,8 +34,10 @@ def index_page():
 
 @app.route('/Videos/<uuid>')
 def video_page(uuid):
-    
     log.LOG_MESSAGE('['+request.remote_addr+'] --> ' + uuid)
+    
+    
+    
     return uuid
 
 @app.route('/Test/')
