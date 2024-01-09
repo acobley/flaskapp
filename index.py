@@ -34,7 +34,7 @@ def hello_page():
     
     list = ""
     for cat in CATEGORIES:
-        list += "<li>" +str(cat)+ "</li>\n"
+        list += "<li>" +str(cat).capitalize()+ "</li>\n"
         
     return render_template('index.html', items=list)
 
