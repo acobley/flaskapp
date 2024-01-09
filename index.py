@@ -6,6 +6,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, render_t
 # Custom modules
 import modules.data.globals as glb
 import modules.utils.html_items as htmlItems
+import modules.utils.logger as log
 
 app = Flask(__name__)
 app.debug = True
@@ -30,7 +31,7 @@ def index_page():
 @app.route('/Videos/<uuid>')
 def video_page(uuid):
     
-    print('\033[92m' + request.remote_addr + ' - ' + uuid)
+    log.LOG_MESSAGE('['+request.remote_addr+'] --> ' + uuid)
     return uuid
 
 @app.route('/Test/')
