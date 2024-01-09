@@ -15,7 +15,7 @@ def hello_world():
     return render_template('index.html', video_name=IP_NGINX, video_src=src)
 
 @app.route('/Test/')
-def hello_page(name):
+def hello_page():
     
     return """     <a href="/"><h1>myFlix</h1></a>
     <a href="/Video/Big-Buck-Bunny"><p> Movie </p></a> """
