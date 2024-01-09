@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.debug = True
 
 @app.route('/')
-def hello_world():
+def index_page():
     
     response = requests.get(glb.URL_CATEGORIES)    
     JSON_CATEGORIES = response.json()
@@ -25,6 +25,11 @@ def hello_world():
     card = htmlItems.column_card("Big Bug Bunny", "380613d5-71b3-4f24-8a58-ca1a260b49d3", "http://34.125.25.53/pics/bbb-th.png")
     
     return render_template('index.html', categories=list, video_cards=card)
+
+@app.route('/Videos/<uuid>')
+def video_page(uuid):
+    print(uuid)
+    return uuid
 
 @app.route('/Test/')
 def hello_page():
