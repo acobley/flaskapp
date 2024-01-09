@@ -21,7 +21,7 @@ def hello_world():
     
     src = "http://" + glb.IP_NGINX + "/mp4/bbb.mp4"
     
-    return render_template('index.html', video_name=glb.IP_NGINX, video_src=src)
+    return render_template('index.html', video_name=glb.IP_NGINX, video_src=src, categories=list)
 
 @app.route('/Test/')
 def hello_page():
