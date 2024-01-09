@@ -11,18 +11,21 @@ app.debug = True
 @app.route('/')
 def hello_world():
     
+    response = requests.get(glb.URL_CATEGORIES)    
+    JSON_CATEGORIES = response.json()
+    CATEGORIES = [item['category'] for item in JSON_CATEGORIES]
+    
+    list = ""
+    for item in CATEGORIES:
+        list += '<li><a class="dropdown-item" href="./">' +str(item).capitalize()+ '</li>\n'
+    
     src = "http://" + glb.IP_NGINX + "/mp4/bbb.mp4"
     
     return render_template('index.html', video_name=glb.IP_NGINX, video_src=src)
 
 @app.route('/Test/')
 def hello_page():
-    
-    response = requests.get(glb.URL_CATEGORIES)
-    print(response)
-    
-    JSON_CATEGORIES = response.json()
-    CATEGORIES = [item['category'] for item in JSON_CATEGORIES]
+
     
     response = requests.get(glb.URL_VIDEOS)
     print(response)
