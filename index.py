@@ -47,10 +47,9 @@ def video_page(uuid):
         log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
         
     JSON_VIDEO = response.json()
-    VIDEO = JSON_VIDEO[0]['video']['Name']
-    print(VIDEO)
-    
-    return uuid
+    VIDEO = JSON_VIDEO[0]['video']
+    src = glb.IP_NGINX + '/mp4/' +  VIDEO['file']
+    return render_template("video.html", video_name=VIDEO['Name'], pic=VIDEO['thumb'], video_src=src)
 
 @app.route('/Test/')
 def hello_page():   
