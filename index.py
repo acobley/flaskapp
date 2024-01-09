@@ -1,6 +1,7 @@
 import requests
 import json
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
+from termcolor import colored
 
 # Custom modules
 import modules.data.globals as glb
@@ -29,7 +30,7 @@ def index_page():
 @app.route('/Videos/<uuid>')
 def video_page(uuid):
     
-    print(request.remote_addr + ' - ' + uuid)
+    print(colored(request.remote_addr + ' - ' + uuid, 'cyan'))
     return uuid
 
 @app.route('/Test/')
