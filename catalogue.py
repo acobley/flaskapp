@@ -6,7 +6,7 @@ import json
 import requests
 # First we set our credentials
 
-from Flask import flask, request
+import Flask, requests
 # session, g, redirect, url_for, abort, \
 #      render_template, flash
 app = flask(__name__)
