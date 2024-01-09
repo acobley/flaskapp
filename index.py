@@ -14,15 +14,27 @@ app.debug = True
 @app.route('/')
 def index_page():
     
+    # Get list of categories
     response = requests.get(glb.URL_CATEGORIES)    
     if (response.status_code != 200):
         log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']))
         return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']) + log.cmd_color.WHITE
     else:
         log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
-        
     JSON_CATEGORIES = response.json()
     CATEGORIES = [item['category'] for item in JSON_CATEGORIES]
+    
+    # Get list of videos
+    response = requests.get("http://34.16.159.36/myflix/videos?category=shorts")
+    if (response.status_code != 200):
+        log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']))
+        return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']) + log.cmd_color.WHITE
+    else:
+        log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
+    JSON_VIDEOS = response.json()
+    VIDEOS = [item['video']['category'] for item in JSON_VIDEOS]
+    
+    print(VIDEOS)
     
     list = ""
     for item in CATEGORIES:
@@ -43,14 +55,15 @@ def video_page(uuid):
     URL_UUID_FILTER = glb.URL_VIDEOS + '?filter={"video.uuid":"' +uuid+ '"}'
     response = requests.get(URL_UUID_FILTER)    
     if (response.status_code != 200):
-        log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, video['Exception']['Message']))
-        return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, video['Exception']['Message']) + log.cmd_color.WHITE
+        log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEO['Exception']['Message']))
+        return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEO['Exception']['Message']) + log.cmd_color.WHITE
     else:
         log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
         
     JSON_VIDEO = response.json()
     VIDEO = JSON_VIDEO[0]['video']
     src = 'http://' + glb.IP_NGINX + '/mp4/' +  VIDEO['file']
+    
     return render_template("video.html", video_name=VIDEO['Name'], pic=VIDEO['thumb'], video_src=src)
 
 @app.route('/Test/')
