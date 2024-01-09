@@ -4,6 +4,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, render_t
 
 # Custom modules
 import modules.data.globals as glb
+import modules.utils.html_items as htmlItems
 
 app = Flask(__name__)
 app.debug = True
@@ -19,9 +20,11 @@ def hello_world():
     for item in CATEGORIES:
         list += '<li><a class="dropdown-item" href="./">' +str(item).capitalize()+ '</a></li>\n'
     
-    src = "http://" + glb.IP_NGINX + "/mp4/bbb.mp4"
+    src = "http://" + glb.IP_NGINX + "/pics/bbb-th.png"
     
-    return render_template('index.html', categories=list)
+    something = htmlItems.carouselItem(src, "Big Buck Bunny")
+    
+    return render_template('index.html', categories=list, th_images=something)
 
 @app.route('/Test/')
 def hello_page():
