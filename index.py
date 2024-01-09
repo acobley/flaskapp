@@ -10,7 +10,7 @@ IP_NGINX = "34.125.25.53"
 @app.route('/')
 def hello_world():
     
-    src = "http://" + IP_DB + "/mp4/bbb.mp4"
+    src = "http://" + IP_NGINX + "/mp4/bbb.mp4"
     
     return render_template('index.html', video_name=IP_NGINX, video_src=src)
 
