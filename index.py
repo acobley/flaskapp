@@ -28,7 +28,8 @@ def index_page():
 
 @app.route('/Videos/<uuid>')
 def video_page(uuid):
-    print(uuid)
+    
+    print(request.remote_addr + ' - ' + uuid)
     return uuid
 
 @app.route('/Test/')
