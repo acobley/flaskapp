@@ -21,7 +21,7 @@ def hello_world():
 @app.route('/Test/')
 def hello_page():
     
-    item = "<li>"+str(TEST[4])+"</l1>"
+    item = "<li>"+str(TEST[4])+"</li>"
         
     return render_template('index.html', items=item)
 
