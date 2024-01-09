@@ -6,9 +6,9 @@ import json
 import requests
 # First we set our credentials
 
-from flask import Flask, request, session, g, redirect, url_for, abort, \
+from Flask import flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
-app = Flask(__name__)
+app = flask(__name__)
 app.debug = True
 
 @app.route('/Video/<video>')
