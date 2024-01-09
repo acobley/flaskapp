@@ -1,16 +1,16 @@
-def carouselItem(src, alt, isActive: bool) -> str: 
-    element = ''
-    if (isActive):
-        element = ' <div class="carousel-item active">\n\t<img src="'+ str(src) +'" class="d-block w-100" alt="'+str(alt)+'">\n</div>'
-    else:
-        element = ' <div class="carousel-item">\n\t<img src="'+ str(src) +'" class="d-block w-100" alt="'+str(alt)+'">\n</div>'
-    return element
-
-def carouselIndicator(data_target_id:str, index:int, isActive: bool) -> str:
-    element = ''
+def column_card(title:str, href:str, imgsrc:str) -> str:
+        
+    elem = '\
+    <div class="col-3 d-flex mt-5 mb-1 justify-content-center"> \
+        <div class="card" style="width: 24rem;">\
+            <a href="/Videos/'+href+'">\
+                <img src="'+imgsrc+'" class="card-img-top" alt="'+title+'"> \
+            </a>\
+            <div class="card-body">\
+                <h5 class="card-title">'+title+'</h5>\
+            </div>\
+        </div>\
+    </div>\
+    '
     
-    if (isActive):
-        element = '<button type="button" data-bs-target="#'+str(data_target_id)+'" data-bs-slide-to="'+str(index)+'" class="active" aria-current="true" aria-label="Slide '+str(index+1)+'"></button>\n'
-    else:
-        element = '<button type="button" data-bs-target="#'+str(data_target_id)+'" data-bs-slide-to="'+str(index)+'" aria-label="Slide '+str(index+1)+'"></button>\n'
-    return element
+    return

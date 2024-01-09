@@ -22,15 +22,7 @@ def hello_world():
     
     src = "http://" + glb.IP_NGINX + "/pics/bbb-th.png"
     
-    carousel_imgs = ""
-    for i in range(10):
-        carousel_imgs += htmlItems.carouselItem(src, "Big Buck Bunny", (i==0))
-        
-    carousel_indicators = ""
-    for i in range(10):
-        carousel_indicators += htmlItems.carouselIndicator("video-carousel-1", i, (i==0))
-    
-    return render_template('index.html', categories=list, th_imgs=carousel_imgs, th_img_btns=carousel_indicators)
+    return render_template('index.html', categories=list, video_cards=htmlItems.column_card("Big Bug Bunny", "380613d5-71b3-4f24-8a58-ca1a260b49d3", "http://34.125.25.53/mp4/bbb.mp4"))
 
 @app.route('/Test/')
 def hello_page():
