@@ -38,7 +38,7 @@ def index_page():
 def video_page(uuid):
     log.LOG_MESSAGE('['+request.remote_addr+'] --> ' + uuid)
     
-    URL_UUID_FILTER = '{0}?filter={"video.uuid":""}'.format(glb.URL_VIDEOS, uuid)
+    URL_UUID_FILTER = '{0}?filter={"video.uuid":"{1}"}'.format(glb.URL_VIDEOS, uuid)
     response = requests.get(URL_UUID_FILTER)    
     if (response.status_code != 200):
         log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, video['Exception']['Message']))
@@ -47,7 +47,7 @@ def video_page(uuid):
         log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
         
     video = json.dumps(response.json(), index=4)
-    print(video)
+    log.LOG_TRACE(video)
     
     return uuid
 
