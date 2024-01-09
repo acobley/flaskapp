@@ -32,9 +32,14 @@ def hello_page():
     JSON_CATEGORIES = response.json()
     CATEGORIES = [item['category'] for item in JSON_CATEGORIES]
     
+    response = requests.get(URL_VIDEOS)
+    print(response)
+    JSON_VIDEOS = response.json()
+    VIDEOS = [item['category'] for item in JSON_VIDEOS]
+    
     list = ""
-    for cat in CATEGORIES:
-        list += "<li>" +str(cat).capitalize()+ "</li>\n"
+    for item in VIDEOS:
+        list += "<li>" +str(item).capitalize()+ "</li>\n"
         
     return render_template('index.html', items=list)
 
