@@ -22,7 +22,9 @@ def hello_world():
     
     src = "http://" + glb.IP_NGINX + "/pics/bbb-th.png"
     
-    something = htmlItems.carouselItem(src, "Big Buck Bunny")
+    something = ""
+    for i in range(10):
+        something += htmlItems.carouselItem(src, "Big Buck Bunny", (i==0))
     
     return render_template('index.html', categories=list, th_imgs=something)
 
