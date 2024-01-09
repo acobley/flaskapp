@@ -15,13 +15,7 @@ TEST = [
 @app.route('/')
 def hello_world():
     
-    URL_CATEGORIES = "http://34.16.159.36/myflix/categories"
-    URL_VIDEOS = "http://34.16.159.36/myflix/videos"
-    
-    response = requests.get(URL_CATEGORIES)
-    print(response)
-    print(response.status_code)
-    print(response.json())
+
     
     src = "http://" + IP_NGINX + "/mp4/bbb.mp4"
     
@@ -30,9 +24,17 @@ def hello_world():
 @app.route('/Test/')
 def hello_page():
     
+    URL_CATEGORIES = "http://34.16.159.36/myflix/categories"
+    URL_VIDEOS = "http://34.16.159.36/myflix/videos"
+    
+    response = requests.get(URL_CATEGORIES)
+    print(response)
+    JSON_CATEGORIES = response.json()
+    CATEGORIES = [item['category'] for item in JSON_CATEGORIES]
+    
     list = ""
-    for item in TEST:
-        list += "<li>" +str(item)+ "</li>\n"
+    for cat in CATEGORIES:
+        list += "<li>" +str(cat)+ "</li>\n"
         
     return render_template('index.html', items=list)
 
