@@ -39,7 +39,7 @@ def hello_world():
     
     return render_template('index.html', video_name=IP_NGINX, video_src=src)
 
-@app.route('/Test')
+@app.route('/Test/')
 def hello_page(name):
     
     print(TEST)
