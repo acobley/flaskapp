@@ -25,8 +25,7 @@ def hello_page():
     for number in TEST:
         names.append( "<li> " +number+ " </li>" )
         
-    
-    return render_template('index.html', items=names)
+    return render_template('index.html', items="<li>"+TEST[4]+"</l1>")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=80)
