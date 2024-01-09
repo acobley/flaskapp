@@ -10,7 +10,7 @@ def carouselIndicator(data_target_id:str, index:int, isActive: bool) -> str:
     element = ''
     
     if (isActive):
-        element = '<button type="button" data-bs-target="#'+str(data_target_id)+'" data-bs-slide-to="'+str(index)+'" class="active" aria-current="true" aria-label="Slide '+str(index+1)+'"></button>'
+        element = '<button type="button" data-bs-target="#'+str(data_target_id)+'" data-bs-slide-to="'+str(index)+'" class="active" aria-current="true" aria-label="Slide '+str(index+1)+'"></button>\n'
     else:
-        element = '<button type="button" data-bs-target="#'+str(data_target_id)+'" data-bs-slide-to="'+str(index)+'" aria-label="Slide '+str(index+1)+'"></button>'
+        element = '<button type="button" data-bs-target="#'+str(data_target_id)+'" data-bs-slide-to="'+str(index)+'" aria-label="Slide '+str(index+1)+'"></button>\n'
     return element
