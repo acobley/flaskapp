@@ -48,7 +48,7 @@ def video_page(uuid):
         
     JSON_VIDEO = response.json()
     VIDEO = JSON_VIDEO[0]['video']
-    src = glb.IP_NGINX + '/mp4/' +  VIDEO['file']
+    src = 'http://' + glb.IP_NGINX + '/mp4/' +  VIDEO['file']
     return render_template("video.html", video_name=VIDEO['Name'], pic=VIDEO['thumb'], video_src=src)
 
 @app.route('/Test/')
