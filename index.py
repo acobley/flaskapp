@@ -7,7 +7,7 @@ app.debug = True
 IP_DB = "34.16.159.36"
 IP_NGINX = "34.125.25.53"
 
-HTML = """ <!DOCTYPE html>
+TEST = """ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -41,7 +41,10 @@ def hello_world():
 
 @app.route('/Test/')
 def hello_page(name):
-    return HTML
+    
+    print(TEST)
+    
+    return TEST
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=80)
