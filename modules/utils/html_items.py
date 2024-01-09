@@ -13,4 +13,4 @@ def column_card(title:str, href:str, imgsrc:str) -> str:
     </div>\
     '
     
-    return
+    return elem

@@ -22,7 +22,9 @@ def hello_world():
     
     src = "http://" + glb.IP_NGINX + "/pics/bbb-th.png"
     
-    return render_template('index.html', categories=list, video_cards=htmlItems.column_card("Big Bug Bunny", "380613d5-71b3-4f24-8a58-ca1a260b49d3", "http://34.125.25.53/mp4/bbb.mp4"))
+    card = htmlItems.column_card("Big Bug Bunny", "380613d5-71b3-4f24-8a58-ca1a260b49d3", "http://34.125.25.53/mp4/bbb.mp4")
+    
+    return render_template('index.html', categories=list, video_cards=card)
 
 @app.route('/Test/')
 def hello_page():
