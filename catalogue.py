@@ -6,10 +6,10 @@ import json
 import requests
 # First we set our credentials
 
-import Flask, requests
+from flask import Flask, Request
 # session, g, redirect, url_for, abort, \
 #      render_template, flash
-app = flask(__name__)
+app = Flask(__name__)
 app.debug = True
 
 @app.route('/Video/<video>')
@@ -18,7 +18,7 @@ def video_page(video):
     url = 'http://34.173.227.154/myflix/videos?filter={"video.uuid":"'+video+'"}'
     headers = {}
     payload = json.dumps({ })
-    print (request.endpoint)
+    print (Request.endpoint)
     response = requests.get(url)
     print (url)
     if response.status_code != 200:
