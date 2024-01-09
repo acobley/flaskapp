@@ -47,7 +47,7 @@ def video_page(uuid):
         log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
         
     JSON_VIDEO = response.json()
-    VIDEO = JSON_VIDEO['video']['Name']
+    VIDEO = JSON_VIDEO[0]['video']['Name']
     print(VIDEO)
     
     return uuid
