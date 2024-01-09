@@ -46,15 +46,14 @@ def video_page(uuid):
     else:
         log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
         
-    video = response.json()
-    print(video)
+    JSON_VIDEO = response.json()
+    VIDEO = JSON_VIDEO['video']['Name']
+    print(VIDEO)
     
     return uuid
 
 @app.route('/Test/')
-def hello_page():
-
-    
+def hello_page():   
     response = requests.get(glb.URL_VIDEOS)
     print(response)
     JSON_VIDEOS = response.json()
