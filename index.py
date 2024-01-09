@@ -38,7 +38,7 @@ def index_page():
     
     list = ""
     for item in CATEGORIES:
-        list += '<li><a class="dropdown-item" href="./">' +str(item).capitalize()+ '</a></li>\n'
+        list += '<li><a class="dropdown-item" href="./Category/'+str(item)+'">' +str(item).capitalize()+ '</a></li>\n'
     
     src = "http://" + glb.IP_NGINX + "/pics/bbb-th.png"
     
@@ -65,6 +65,10 @@ def video_page(uuid):
     src = 'http://' + glb.IP_NGINX + '/mp4/' +  VIDEO['file']
     
     return render_template("video.html", video_name=VIDEO['Name'], pic=VIDEO['thumb'], video_src=src)
+
+@app.route('/Category/<category>')
+def category_page(category):
+    return category
 
 @app.route('/Test/')
 def hello_page():   
