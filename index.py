@@ -21,11 +21,9 @@ def hello_world():
 @app.route('/Test/')
 def hello_page():
     
-    names = []
-    for number in TEST:
-        names.append( "<li> " +number+ " </li>" )
+    item = "<li>"+TEST[4]+"</l1>"
         
-    return render_template('index.html', items="<li>"+TEST[4]+"</l1>")
+    return render_template('index.html', items=item)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=80)
