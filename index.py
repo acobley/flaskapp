@@ -21,9 +21,11 @@ def hello_world():
 @app.route('/Test/')
 def hello_page():
     
-    item = '<li>'+ str(10) +'</li>'
+    list = ""
+    for item in TEST:
+        list += "<li>" +str(item)+ "</li>\n"
         
-    return render_template('index.html', items=item)
+    return render_template('index.html', items=list)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=80)
