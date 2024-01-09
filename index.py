@@ -9,7 +9,7 @@ IP_NGINX = "34.125.25.53"
 
 @app.route('/')
 def hello_world():
-    return render_template('index.html', name=IP_DB)
+    return render_template('index.html', video_name=IP_DB, video_src=IP_DB)
 
 @app.route('/Hello/<name>')
 def hello_page(name):
