@@ -12,7 +12,7 @@ def hello_world():
     
     src = "http://" + IP_DB + "/mp4/bbb.mp4"
     
-    return render_template('index.html', video_name=IP_DB, video_src=src)
+    return render_template('index.html', video_name=IP_NGINX, video_src=src)
 
 @app.route('/Hello/<name>')
 def hello_page(name):
