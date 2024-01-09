@@ -14,7 +14,7 @@ def hello_world():
     
     return render_template('index.html', video_name=IP_NGINX, video_src=src)
 
-@app.route('/Hello/<name>')
+@app.route('/Video/<name>')
 def hello_page(name):
     return '<h1>Hello '+name+'</h1>'
 
