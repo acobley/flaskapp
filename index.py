@@ -35,6 +35,7 @@ def hello_page():
     response = requests.get(URL_VIDEOS)
     print(response)
     JSON_VIDEOS = response.json()
+    print(response.json())
     VIDEOS = [item['Name'] for item in JSON_VIDEOS]
     
     list = ""
