@@ -34,6 +34,8 @@ def index_page():
     
     return render_template('index.html', categories=list, video_cards=card)
 
+
+
 @app.route('/Videos/<uuid>')
 def video_page(uuid):
     log.LOG_MESSAGE('['+request.remote_addr+'] --> ' + uuid)
