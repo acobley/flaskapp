@@ -77,7 +77,7 @@ def category_page(category):
     JSON_VIDEOS = response.json()
     VIDEOS = [item['video']['Name'] for item in JSON_VIDEOS]
     print(VIDEOS)
-    return category
+    return VIDEOS
 
 @app.route('/Test/')
 def hello_page():   
