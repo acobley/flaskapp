@@ -25,7 +25,7 @@ def index_page():
     CATEGORIES = [item['category'] for item in JSON_CATEGORIES]
     
     # Get list of videos
-    response = requests.get("http://34.16.159.36/myflix/videos?category=shorts")
+    response = requests.get("http://34.16.159.36/myflix/videos/")
     if (response.status_code != 200):
         log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']))
         return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']) + log.cmd_color.WHITE
@@ -67,7 +67,16 @@ def video_page(uuid):
 
 @app.route('/Category/<category>')
 def category_page(category):
-    return category
+    
+    response = requests.get('http://34.16.159.36/myflix/videos?filter={"video.category":"'+category+'"}')
+    if (response.status_code != 200):
+        log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']))
+        return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']) + log.cmd_color.WHITE
+    else:
+        log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
+    JSON_VIDEOS = response.json()
+    VIDEOS = [item['Name'] for item in JSON_VIDEOS]
+    return VIDEOS
 
 @app.route('/Test/')
 def hello_page():   
