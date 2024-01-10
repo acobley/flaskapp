@@ -75,7 +75,7 @@ def category_page(category):
     else:
         log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
     JSON_VIDEOS = response.json()
-    VIDEOS = [item['video']['Name'] for item in JSON_VIDEOS]
+    VIDEOS = [item['video'] for item in JSON_VIDEOS]
     print(VIDEOS)
     return VIDEOS
 
