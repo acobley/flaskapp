@@ -1,5 +1,7 @@
-.navbar li.nav-item {
-    color: rgb(164, 0, 0)
+.navbar a.navbar-brand:hover,
+.navbar li.nav-item a:hover
+{
+    color: rgb(164, 0, 0);
 }
 
 .card-title {
