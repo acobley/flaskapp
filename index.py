@@ -33,15 +33,14 @@ def index_page():
         log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
     JSON_VIDEOS = response.json()
     VIDEOS = [item['video'] for item in JSON_VIDEOS]
-    print(VIDEOS[2]['Name'])
     
     list = ""
     for item in CATEGORIES:
         list += '<li><a class="dropdown-item" href="./Category/'+str(item)+'">' +str(item).capitalize()+ '</a></li>\n'
     
-    src = "http://" + glb.IP_NGINX + "/pics/bbb-th.png"
-    
-    card = htmlItems.column_card("Big Bug Bunny", "380613d5-71b3-4f24-8a58-ca1a260b49d3", "http://34.125.25.53/pics/bbb-th.png")
+    card = ""
+    for video in VIDEOS:
+        card += htmlItems.column_card(video['Name'], video['uuid'], "http://{0}/pics/{1}".format(glb.IP_NGINX, video['thumb'])) + '\n'
     
     return render_template('index.html', categories=list, video_cards=card)
 
@@ -92,8 +91,6 @@ def category_page(category):
     list = ""
     for item in CATEGORIES:
         list += '<li><a class="dropdown-item" href="./Category/'+str(item)+'">' +str(item).capitalize()+ '</a></li>\n'
-    
-    print("http://{0}/pics/{1}/".format(glb.IP_NGINX, VIDEOS[0]['thumb']))
     
     card = ""
     for video in VIDEOS:
