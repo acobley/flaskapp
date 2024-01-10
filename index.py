@@ -90,7 +90,7 @@ def category_page(category):
     # Display all video data of this <category>
     list = ""
     for item in CATEGORIES:
-        list += '<li><a class="dropdown-item" href="./Category/'+str(item)+'">' +str(item).capitalize()+ '</a></li>\n'
+        list += '<li><a class="dropdown-item" href="./'+str(item)+'">' +str(item).capitalize()+ '</a></li>\n'
     
     card = ""
     for video in VIDEOS:
