@@ -76,7 +76,7 @@ def category_page(category):
         log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
     JSON_VIDEOS = response.json()
     VIDEOS = [item['Name'] for item in JSON_VIDEOS]
-    print(VIDEOS)
+    print(JSON_VIDEOS[0])
     return category
 
 @app.route('/Test/')
