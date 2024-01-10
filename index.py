@@ -93,6 +93,8 @@ def category_page(category):
     for item in CATEGORIES:
         list += '<li><a class="dropdown-item" href="./Category/'+str(item)+'">' +str(item).capitalize()+ '</a></li>\n'
     
+    print("http://{0}/pics/{1}/".format(glb.IP_NGINX, VIDEOS[0]['thumb']))
+    
     card = ""
     for video in VIDEOS:
         card += htmlItems.column_card(video['Name'], video['uuid'], "http://{0}/pics/{1}/".format(glb.IP_NGINX, video['thumb'])) + '\n'
