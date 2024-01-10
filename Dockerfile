@@ -5,8 +5,8 @@ RUN pip install -r /home/requirements.txt
 COPY *.py /home/
 COPY templates/*.* /home/templates/
 
-COPY modules/data/*.py /home/modules/data/*.py
-COPY modules/utils/*.py /home/modules/utils/*.py
+COPY modules/data/*.py /home/modules/data/
+COPY modules/utils/*.py /home/modules/utils/
 
 ENTRYPOINT ["python"]
 CMD ["/home/index.py" ]
