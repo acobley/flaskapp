@@ -6,4 +6,4 @@ COPY *.py /home/
 COPY templates/*.* /home/templates/
 ENTRYPOINT ["python"]
 CMD ["/home/index.py" ]
-EXPOSE 5000
+EXPOSE 80
