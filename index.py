@@ -17,20 +17,20 @@ def index_page():
     # Get list of categories
     response = requests.get(glb.URL_CATEGORIES)    
     if (response.status_code != 200):
-        log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']))
+        log.ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']))
         return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']) + log.cmd_color.WHITE
     else:
-        log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
+        log.SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
     JSON_CATEGORIES = response.json()
     CATEGORIES = [item['category'] for item in JSON_CATEGORIES]
     
     # Get list of videos
     response = requests.get("http://34.16.159.36/myflix/videos/")
     if (response.status_code != 200):
-        log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']))
+        log.ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']))
         return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']) + log.cmd_color.WHITE
     else:
-        log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
+        log.SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
     JSON_VIDEOS = response.json()
     VIDEOS = [item['video'] for item in JSON_VIDEOS]
     
@@ -48,15 +48,15 @@ def index_page():
 
 @app.route('/Videos/<uuid>')
 def video_page(uuid):
-    log.LOG_MESSAGE('['+request.remote_addr+'] --> ' + uuid)
+    log.MESSAGE('['+request.remote_addr+'] --> ' + uuid)
     
     URL_UUID_FILTER = glb.URL_VIDEOS + '?filter={"video.uuid":"' +uuid+ '"}'
     response = requests.get(URL_UUID_FILTER)    
     if (response.status_code != 200):
-        log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEO['Exception']['Message']))
+        log.ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEO['Exception']['Message']))
         return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEO['Exception']['Message']) + log.cmd_color.WHITE
     else:
-        log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
+        log.SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
         
     JSON_VIDEO = response.json()
     VIDEO = JSON_VIDEO[0]['video']
@@ -70,20 +70,20 @@ def category_page(category):
     # Fetch all video data of this <category>
     response = requests.get('http://34.16.159.36/myflix/videos?filter={"video.category":"'+category+'"}')
     if (response.status_code != 200):
-        log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']))
+        log.ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']))
         return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']) + log.cmd_color.WHITE
     else:
-        log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
+        log.SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
     JSON_VIDEOS = response.json()
     VIDEOS = [item['video'] for item in JSON_VIDEOS]
     
     # Get list of categories
     response = requests.get(glb.URL_CATEGORIES)    
     if (response.status_code != 200):
-        log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']))
+        log.ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']))
         return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']) + log.cmd_color.WHITE
     else:
-        log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
+        log.SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
     JSON_CATEGORIES = response.json()
     CATEGORIES = [item['category'] for item in JSON_CATEGORIES]
     

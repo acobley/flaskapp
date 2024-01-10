@@ -11,17 +11,17 @@ class cmd_color:
 	WHITE       = "\033[97m"
 
 
-def LOG_ERROR(data):
+def ERROR(data):
     print(cmd_color.RED + data + cmd_color.WHITE)
     
-def LOG_WARNING(data):
+def WARNING(data):
     print(cmd_color.YELLOW + data + cmd_color.WHITE)
     
-def LOG_SUCCESS(data):
+def SUCCESS(data):
     print(cmd_color.GREEEN + data + cmd_color.WHITE)
     
-def LOG_MESSAGE(data):
+def MESSAGE(data):
     print(cmd_color.CYAN + data + cmd_color.WHITE)
     
-def LOG_TRACE(data):
+def TRACE(data):
     print(cmd_color.MAGENTA + data + cmd_color.WHITE)
