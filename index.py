@@ -97,7 +97,7 @@ def category_page(category):
     
     card = ""
     for video in VIDEOS:
-        card += htmlItems.column_card(video['Name'], video['uuid'], "http://{0}/pics/{1}/".format(glb.IP_NGINX, video['thumb'])) + '\n'
+        card += htmlItems.column_card(video['Name'], video['uuid'], "http://{0}/pics/{1}".format(glb.IP_NGINX, video['thumb'])) + '\n'
     
     return render_template('category.html', category=category, categories=list, video_cards=card)
 
