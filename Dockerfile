@@ -10,7 +10,7 @@ COPY modules/utils/*.py /home/modules/utils/
 
 # Webpage
 COPY templates/*.* /home/templates/
-COPY templates/css/*.css /home/templates/css/
+COPY ./css/*.css /home/css/
 
 ENTRYPOINT ["python"]
 CMD ["/home/index.py" ]
