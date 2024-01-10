@@ -68,6 +68,7 @@ def video_page(uuid):
 @app.route('/Category/<category>')
 def category_page(category):
     
+    # Fetch all video data of this <category>
     response = requests.get('http://34.16.159.36/myflix/videos?filter={"video.category":"'+category+'"}')
     if (response.status_code != 200):
         log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_VIDEOS['Exception']['Message']))
@@ -76,8 +77,27 @@ def category_page(category):
         log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
     JSON_VIDEOS = response.json()
     VIDEOS = [item['video'] for item in JSON_VIDEOS]
-    print(VIDEOS)
-    return VIDEOS
+    
+    # Get list of categories
+    response = requests.get(glb.URL_CATEGORIES)    
+    if (response.status_code != 200):
+        log.LOG_ERROR("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']))
+        return log.cmd_color.RED + "Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, JSON_CATEGORIES['Exception']['Message']) + log.cmd_color.WHITE
+    else:
+        log.LOG_SUCCESS("[{0}] -- Fetched correctly!".format(request.remote_addr))
+    JSON_CATEGORIES = response.json()
+    CATEGORIES = [item['category'] for item in JSON_CATEGORIES]
+    
+    # Display all video data of this <category>
+    list = ""
+    for item in CATEGORIES:
+        list += '<li><a class="dropdown-item" href="./Category/'+str(item)+'">' +str(item).capitalize()+ '</a></li>\n'
+    
+    card = ""
+    for video in VIDEOS:
+        card += htmlItems.column_card(video['Name'], video['uuid'], "http://{0}/pics/{1}/".format(glb.IP_NGINX, video['thumb'])) + '\n'
+    
+    return render_template('category.html', category=category, categories=list, video_cards=card)
 
 @app.route('/Test/')
 def hello_page():   
