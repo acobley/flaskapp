@@ -8,7 +8,7 @@ import modules.data.globals as glb
 import modules.utils.html_items as htmlItems
 import modules.utils.logger as log
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='css')
 app.debug = True
 
 @app.route('/')
