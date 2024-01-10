@@ -1,3 +1,5 @@
+#!/bin/bash
+
 docker build -t flaskapp .
 docker tag flaskapp acobley/flaskapp
 docker push acobley/flaskapp
