@@ -40,6 +40,7 @@ def index_page():
     
     card = ""
     for video in VIDEOS:
+        print(video['Name'])
         card += htmlItems.column_card(video['Name'], video['uuid'], "http://{0}/pics/{1}".format(glb.IP_NGINX, video['thumb'])) + '\n'
     
     return render_template('index.html', categories=list, video_cards=card)
