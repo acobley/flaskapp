@@ -1,9 +1,9 @@
 FROM python:3.9
 RUN pip install --upgrade pip
-COPY flaskapp/requirements.txt /home/flaskapp
-RUN pip install -r /home/flaskapp/requirements.txt
+COPY requirements.txt /home/
+RUN pip install -r /home/requirements.txt
 COPY *.py /home/
-COPY flaskapp/templates/*.* /home/flaskapp/templates/
+COPY templates/*.* /home/templates/
 ENTRYPOINT ["python"]
-CMD ["/home/flaskapp/index.py" ]
+CMD ["/home/catalogue.py" ]
 EXPOSE 5000
