@@ -1,4 +1,4 @@
-name: Example Workflow
+name: SSH-TEST
 
 on:
     push:
@@ -32,7 +32,7 @@ jobs:
           service_account_key: ${{ secrets.GCLOUD_JSON_KEY }}
 
       - name: Copy SSH key
-        run: echo "${{ secrets.GCLOUD_JSON_KEY }}" > ~/gcloud_ssh_key.json
+        run: echo "${{ secrets.GCLOUD_JSON_KEY }}" > ~/gcloud_ssh_key.json; ls -la
       
       - name: Authenticate with Google Cloud CLI
         run: gcloud auth activate-service-account --key-file=~/gcloud_ssh_key.json
