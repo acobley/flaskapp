@@ -1,4 +1,4 @@
-name: SSH-TEST
+name: Update, (Re)deploy Docker Image 
 
 on:
     push:
@@ -10,16 +10,16 @@ on:
       inputs:
         name:
           # Friendly description to be shown in the UI instead of 'name'
-          description: 'SSH-TEST'
+          description: 'Updates the cloned repo in the GCP VM, builds a new docker image and redeploys it'
           # Default value if no value is explicitly provided
-          default: 'Manual triggered update'
+          default: 'Update, (Re)deploy Docker Image'
           # Input has to be provided for the workflow to run
           required: true
           # The data type of the input
           type: string
 
 jobs:
-  example_job:
+  UPD-SSH2VM:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,11 +30,12 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
           service_account_key: ${{ secrets.GCLOUD_JSON_KEY }}
-      
+  
       - id: 'auth'
+        name: Authenticate on GCP
         uses: 'google-github-actions/auth@v2'
         with:
           credentials_json: '${{ secrets.GCLOUD_JSON_KEY }}'
 
       - name: SSH into VM
-        run: gcloud compute ssh --project=${{ secrets.GCLOUD_PROJECT_ID }} --zone=${{ secrets.VM_REGION }} ${{ secrets.VM_NAME }} --quiet --command="cd ../cosoulshard/flaskapp; sudo bash ./rebuild.sh"
+        run: gcloud compute ssh --project=${{ secrets.GCLOUD_PROJECT_ID }} --zone=${{ secrets.VM_REGION }} ${{ secrets.VM_NAME }} --quiet --command="cd ../cosoulshard/flaskapp; sudo bash ./deploy_image.sh"
