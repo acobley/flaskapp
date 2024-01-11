@@ -1,0 +1,41 @@
+name: Example Workflow
+
+on:
+    push:
+      branches:
+        - main
+  
+    workflow_dispatch:
+      # Inputs the workflow accepts.
+      inputs:
+        name:
+          # Friendly description to be shown in the UI instead of 'name'
+          description: 'SSH-TEST'
+          # Default value if no value is explicitly provided
+          default: 'Manual triggered update'
+          # Input has to be provided for the workflow to run
+          required: true
+          # The data type of the input
+          type: string
+
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          service_account_key: ${{ secrets.GCLOUD_JSON_KEY }}
+
+      - name: Copy SSH key
+        run: echo "${{ secrets.GCLOUD_JSON_KEY }}" > ~/gcloud_ssh_key.json
+      
+      - name: Authenticate with Google Cloud CLI
+        run: gcloud auth activate-service-account --key-file=~/gcloud_ssh_key.json
+
+      - name: SSH into VM
+        run: gcloud compute ssh --project=${{ secrets.GCLOUD_PROJECT_ID }} --zone=${{ secrets.VM_REGION }} ${{ secrets.VM_NAME }} --quiet --command="cd ../cosoulshard/flaskapp; ls"
