@@ -1,54 +1,54 @@
-name: Update repo clone on VM
+# name: Update repo clone on VM
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI or API, or when a change occurs on the [main] branch
-on:
-  push:
-    branches:
-      - main
+# # Controls when the action will run. Workflow runs when manually triggered using the UI or API, or when a change occurs on the [main] branch
+# on:
+#   push:
+#     branches:
+#       - main
 
-  workflow_dispatch:
-    # Inputs the workflow accepts.
-    inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Updates the cloned repo in the VM instance'
-        # Default value if no value is explicitly provided
-        default: 'Manual triggered update'
-        # Input has to be provided for the workflow to run
-        required: true
-        # The data type of the input
-        type: string
+#   workflow_dispatch:
+#     # Inputs the workflow accepts.
+#     inputs:
+#       name:
+#         # Friendly description to be shown in the UI instead of 'name'
+#         description: 'Updates the cloned repo in the VM instance'
+#         # Default value if no value is explicitly provided
+#         default: 'Manual triggered update'
+#         # Input has to be provided for the workflow to run
+#         required: true
+#         # The data type of the input
+#         type: string
 
-# Code adapted from - https://github.com/google-github-actions/ssh-compute/blob/main/workflow-examples/ssh-command-example.yml - 10/01/2024
-jobs:
-  ssh:
-    runs-on: 'ubuntu-latest'
-    permissions:
-      contents: 'read'
-      id-token: 'write'
+# # Code adapted from - https://github.com/google-github-actions/ssh-compute/blob/main/workflow-examples/ssh-command-example.yml - 10/01/2024
+# jobs:
+#   ssh:
+#     runs-on: 'ubuntu-latest'
+#     permissions:
+#       contents: 'read'
+#       id-token: 'write'
 
-    steps:
+#     steps:
     
-    - name: 'Checkout'
-      uses: 'actions/checkout@v3'
-    - id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v2'
-      with:
-        workload_identity_provider: '${{ vars.WIF_PROVIDER_NAME }}'
-        service_account: '${{ vars.SERVICE_ACCOUNT_EMAIL }}'
+#     - name: 'Checkout'
+#       uses: 'actions/checkout@v3'
+#     - id: 'auth'
+#       name: 'Authenticate to Google Cloud'
+#       uses: 'google-github-actions/auth@v2'
+#       with:
+#         workload_identity_provider: '${{ vars.WIF_PROVIDER_NAME }}'
+#         service_account: '${{ vars.SERVICE_ACCOUNT_EMAIL }}'
 
-    - name: 'SSH to GCCE instance'
-      id: 'ssh'
-      uses: 'google-github-actions/ssh-compute@v1'
-      with:
-        instance_name: 'instance-name'
-        zone: '${{ env.ZONE }}'
-        ssh_private_key: '${{ secrets.VM_PRIVATE_KEY }}'
-        command: 'cd ./flaskapp; sudo bash deploy_image.sh'
+#     - name: 'SSH to GCCE instance'
+#       id: 'ssh'
+#       uses: 'google-github-actions/ssh-compute@v1'
+#       with:
+#         instance_name: 'instance-name'
+#         zone: '${{ env.ZONE }}'
+#         ssh_private_key: '${{ secrets.VM_PRIVATE_KEY }}'
+#         command: 'cd ./flaskapp; sudo bash deploy_image.sh'
 
-    - name: 'Show Output'
-      run: |-
-        echo '${{ steps.ssh.outputs.stdout }}'
-        echo '${{ steps.ssh.outputs.stderr }}'
+#     - name: 'Show Output'
+#       run: |-
+#         echo '${{ steps.ssh.outputs.stdout }}'
+#         echo '${{ steps.ssh.outputs.stderr }}'
 
