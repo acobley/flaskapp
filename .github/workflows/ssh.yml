@@ -37,4 +37,4 @@ jobs:
           credentials_json: '${{ secrets.GCLOUD_JSON_KEY }}'
 
       - name: SSH into VM
-        run: gcloud compute ssh --project=${{ secrets.GCLOUD_PROJECT_ID }} --zone=${{ secrets.VM_REGION }} ${{ secrets.VM_NAME }} --quiet --command="cd ../cosoulshard/flaskapp; ls"
+        run: gcloud compute ssh --project=${{ secrets.GCLOUD_PROJECT_ID }} --zone=${{ secrets.VM_REGION }} ${{ secrets.VM_NAME }} --quiet --command="cd ../cosoulshard/flaskapp; cat ./rebuild.sh"
