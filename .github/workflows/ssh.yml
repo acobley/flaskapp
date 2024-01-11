@@ -30,6 +30,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
           service_account_key: ${{ secrets.GCLOUD_JSON_KEY }}
+      
       - id: 'auth'
         uses: 'google-github-actions/auth@v2'
         with:
