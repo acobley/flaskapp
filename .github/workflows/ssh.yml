@@ -32,7 +32,7 @@ jobs:
           service_account_key: ${{ secrets.GCLOUD_JSON_KEY }}
 
       - name: Copy SSH key
-        run: cat Dokcerfile; echo "${{ secrets.GCLOUD_JSON_KEY }}" > ./gcloud_ssh_key.json; ls ./
+        run: cat ./Dockerfile; echo "${{ secrets.GCLOUD_JSON_KEY }}" > ./gcloud_ssh_key.json; ls ./
       
       - name: Authenticate with Google Cloud CLI
         run: gcloud auth activate-service-account --key-file=<(echo "${{ secrets.GCLOUD_JSON_KEY }}")
