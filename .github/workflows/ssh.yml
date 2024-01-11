@@ -35,7 +35,7 @@ jobs:
         run: echo "${{ secrets.GCLOUD_JSON_KEY }}" > ./gcloud_ssh_key.json; ls ./
       
       - name: Authenticate with Google Cloud CLI
-        run: echo $(readlink -f ./); gcloud auth activate-service-account --key-file=$(readlink -f ./)/gcloud_ssh_key.json
+        run: ls $(readlink -f ./); gcloud auth activate-service-account --key-file=$(readlink -f ./)/gcloud_ssh_key.json
 
       - name: SSH into VM
         run: gcloud compute ssh --project=${{ secrets.GCLOUD_PROJECT_ID }} --zone=${{ secrets.VM_REGION }} ${{ secrets.VM_NAME }} --quiet --command="cd ../cosoulshard/flaskapp; ls"
