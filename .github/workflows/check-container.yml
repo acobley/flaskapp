@@ -1,10 +1,6 @@
 name: Check container state
 
 on:
-    push:
-      branches:
-        - main
-  
     workflow_dispatch:
       # Inputs the workflow accepts.
       inputs:
