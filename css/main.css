@@ -4,6 +4,10 @@
     color: rgb(164, 0, 0);
 }
 
+.card:hover {
+    border-color: red;
+}
+
 .card-title {
     color: rgb(224, 0, 0)
 }
