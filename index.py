@@ -39,7 +39,7 @@ def index_page():
         list += '<li><a class="dropdown-item" href="./Category/'+str(item)+'">' +str(item).capitalize()+ '</a></li>\n'
     
     card = ""
-    for video in VIDEOS:
+    for video in VIDEOS:        
         print(video['Name'])
         card += htmlItems.column_card(video['Name'], video['uuid'], "http://{0}/pics/{1}".format(glb.IP_NGINX, video['thumb'])) + '\n'
     
@@ -97,7 +97,7 @@ def category_page(category):
     for video in VIDEOS:
         card += htmlItems.column_card(video['Name'], video['uuid'], "http://{0}/pics/{1}".format(glb.IP_NGINX, video['thumb'])) + '\n'
     
-    return render_template('category.html', category=category, categories=list, video_cards=card)
+    return render_template('category.html', category=category, category_name=str(category).capitalize(), categories=list, video_cards=card)
 
 @app.route('/Test/')
 def hello_page():   
