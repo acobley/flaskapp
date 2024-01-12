@@ -1,0 +1,50 @@
+name: Teardown Flask-app
+
+on:
+    workflow_dispatch:
+      # Inputs the workflow accepts.
+      inputs:
+        name:
+          # Friendly description to be shown in the UI instead of 'name'
+          description: 'Removes the flaskapp container and container image from the VM.'
+          # Default value if no value is explicitly provided
+          default: Teardown Flask-app
+          # Input has to be provided for the workflow to run
+          required: true
+          # The data type of the input
+          type: string
+
+jobs:
+  Teardown:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          service_account_key: ${{ secrets.GCLOUD_JSON_KEY }}
+
+      - id: 'auth'
+        name: Authenticate on GCP
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCLOUD_JSON_KEY }}'
+      
+      - name: Teardown in VM SSH
+        run: gcloud compute ssh --project=${{ secrets.GCLOUD_PROJECT_ID }} --zone=${{ secrets.VM_REGION }} ${{ secrets.VM_NAME }} --quiet --command="sudo docker stop myflix; sudo docker rm myflix; sudo docker image rm flaskapp"
+  
+  Check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          service_account_key: ${{ secrets.GCLOUD_JSON_KEY }}
+
+      - id: 'auth'
+        name: Authenticate on GCP
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCLOUD_JSON_KEY }}'
+      
+      - name: Validate in VM SSH
+        run: gcloud compute ssh --project=${{ secrets.GCLOUD_PROJECT_ID }} --zone=${{ secrets.VM_REGION }} ${{ secrets.VM_NAME }} --quiet --command="sudo docker ps -a"
