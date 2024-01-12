@@ -10,7 +10,7 @@ on:
           type: string
 
 jobs:
-  Stop:
+  Start:
     runs-on: ubuntu-latest
     steps:
     - name: Set up Google Cloud SDK
