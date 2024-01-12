@@ -1,0 +1,28 @@
+name: Start Flask-app
+
+on:
+    workflow_dispatch:
+      inputs:
+        name:
+          description: 'Starts the docker container of this Flask-app'
+          default: Stop Flask-app
+          required: true
+          type: string
+
+jobs:
+  Stop:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ secrets.GCLOUD_JSON_KEY }}
+
+    - id: 'auth'
+      name: Authenticate on GCP
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCLOUD_JSON_KEY }}'
+    
+    - name: Start Flask-app container
+      run: gcloud compute ssh --project=${{ secrets.GCLOUD_PROJECT_ID }} --zone=${{ secrets.VM_REGION }} ${{ secrets.VM_NAME }} --quiet --command="sudo docker start myflix"
