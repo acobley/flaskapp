@@ -63,7 +63,7 @@ def video_page(uuid):
     VIDEO = JSON_VIDEO[0]['video']
     src = 'http://' + glb.IP_NGINX + '/mp4/' +  VIDEO['file']
     
-    return render_template("video.html", video_name=VIDEO['Name'], pic=VIDEO['thumb'], video_src=src)
+    return render_template("video.html", video_name=VIDEO['Name'], pic=VIDEO['thumb'], video_src=src, original_source=VIDEO['original_src'], src_license=VIDEO['license_src'])
 
 @app.route('/Category/<category>')
 def category_page(category):
